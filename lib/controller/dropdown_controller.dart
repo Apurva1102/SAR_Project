@@ -1,43 +1,53 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class DropdownController extends GetxController {
-  // Observable string for the leave type dropdown
-  var dropdownValue = "Paid Leave".obs;
-
-  // Observable string for the half dropdown
-  var dropdownValue2 = "First Half".obs;
-
-  // Observable DateTime for start and end dates
+  var leaveType = 'Sick Leave'.obs;
+  var startDayType = 'Full Day'.obs;
+  var endDayType = 'Full Day'.obs;
   var startDate = DateTime.now().obs;
   var endDate = DateTime.now().obs;
 
-  // List of options for the leave type dropdown
-  List<String> list = <String>["Paid Leave", "Unpaid Leave"];
+  final leaveTypes = ['Sick Leave', 'Casual Leave', 'Annual Leave'];
+  final dayTypes = ['Full Day', 'Half Day'];
 
-  // List of options for the half dropdown
-  List<String> list1 = <String>["First Half", "Second Half"];
+  String get formattedStartDate => getFormattedDate(startDate.value);
+  String get formattedEndDate => getFormattedDate(endDate.value);
 
-  // Method to update the leave type dropdown value
-  void updateValue(String? newValue) {
+  void updateLeaveType(String? newValue) => leaveType.value = newValue!;
+
+  void updateStartDayType(String? newValue) => startDayType.value = newValue!;
+  void updateEndDayType(String? newValue) => endDayType.value = newValue!;
+
+  void updateStartDate(DateTime newStartDate) => startDate.value = newStartDate;
+  void updateEndDate(DateTime newEndDate) => endDate.value = newEndDate;
+
+  String getFormattedDate(DateTime date) {
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    return formatter.format(date);
+  }
+
+  void startDayTypeChange(String? newValue) {
     if (newValue != null) {
-      dropdownValue.value = newValue;
+      updateStartDayType(newValue);
+      // Logic to synchronize day types
+      if (newValue == 'Half Day' && startDate.value == endDate.value) {
+        updateEndDayType('Half Day');
+      } else if (newValue == 'Full Day' && startDate.value == endDate.value) {
+        updateEndDayType('Full Day');
+      }
     }
   }
 
-  // Method to update the half dropdown value
-  void updateValue2(String? newValue) {
+  void endDayTypeChange(String? newValue) {
     if (newValue != null) {
-      dropdownValue2.value = newValue;
+      updateEndDayType(newValue);
+      // Logic to synchronize day types
+      if (newValue == 'Half Day' && startDate.value == endDate.value) {
+        updateStartDayType('Half Day');
+      } else if (newValue == 'Full Day' && startDate.value == endDate.value) {
+        updateStartDayType('Full Day');
+      }
     }
-  }
-
-  // Method to update the start date
-  void updateStartDate(DateTime date) {
-    startDate.value = date;
-  }
-
-  // Method to update the end date
-  void updateEndDate(DateTime date) {
-    endDate.value = date;
   }
 }

@@ -1,10 +1,13 @@
 import 'package:get/get.dart';
 import 'package:sar_project/binding/binding.dart';
+import 'package:sar_project/common_widgets/status_bar.dart';
 import 'package:sar_project/screens/students/profile_student_screen.dart';
 import 'package:sar_project/screens/students/setting_student_screen.dart';
 import 'package:sar_project/screens/students/student_changepassword.dart';
 import 'package:sar_project/screens/students/student_notification.dart';
+import 'package:sar_project/screens/students/student_notification_status.dart';
 import 'package:sar_project/screens/teachers/dashboard_teacher.dart';
+import 'package:sar_project/screens/teachers/dashboard_teacherContent.dart';
 import 'package:sar_project/screens/teachers/leave_screen.dart';
 import 'package:sar_project/screens/teachers/profile_teacher_screen.dart';
 import 'package:sar_project/screens/teachers/setting_teacher_screen.dart';
@@ -33,12 +36,12 @@ class AppPages {
     ),
     GetPage(
       name: '/forgetpass',
-      page: () => const ForgetpassScreen(),
+      page: () => ForgetpassScreen(),
       binding: forget_pass(),
     ),
     GetPage(
       name: '/verificationcode',
-      page: () => const VerificationCodeScreen(),
+      page: () => VerificationCodeScreen(),
       binding: verificationcode_screen(),
     ),
     GetPage(
@@ -47,13 +50,18 @@ class AppPages {
       binding: dashboard_teacher(),
     ),
     GetPage(
+      name: '/dashboard_teacherContent',
+      page: () => DashboardContent(),
+      // binding: dashboard_teacher(),
+    ),
+    GetPage(
       name: '/leave_screen',
-      page: () => const LeaveScreen(),
+      page: () => LeaveScreen(),
       binding: leave_screen(),
     ),
     GetPage(
       name: '/profile_teacher_screen',
-      page: () => const ProfileTeacherScreen(),
+      page: () => ProfileTeacherScreen(),
       binding: profile_teacher_screen(),
     ),
     GetPage(
@@ -62,32 +70,42 @@ class AppPages {
       binding: setting_teacher(),
     ),
     GetPage(
-        name: '/teacher_changepassword',
-        page: ()=> TeacherChangepassword(),
+      name: '/teacher_changepassword',
+      page: () => TeacherChangepassword(),
       binding: student_changepassword(),
     ),
     GetPage(
-        name: '/teacher_notification_screen',
-        page: ()=> TeacherNotificationScreen(),
-
+      name: '/teacher_notification_screen',
+      page: () => TeacherNotificationScreen(),
+      binding: teacher_notification_screen(),
+    ),
+    GetPage(
+      name: '/status_bar',
+      page: () => StatusBar(),
+      binding: status_bar(),
     ),
     GetPage(
       name: '/dashboard_student',
-      page: () => const DashboardStudent(),
+      page: () => DashboardStudent(),
       binding: dashboard_student(),
     ),
     GetPage(
         name: '/profile_student_screen',
-        page: () => const ProfileStudentScreen(),
+        page: () => ProfileStudentScreen(),
         binding: profile_student_screen()),
     GetPage(
         name: '/setting_student_screen',
-        page: () => const SettingStudentScreen(),
+        page: () => SettingStudentScreen(),
         binding: setting_student_screen()),
     GetPage(
         name: '/student_notification',
-        page: () => const StudentNotification(),
+        page: () => StudentNotification(),
         binding: student_notification()),
+    GetPage(
+      name: '/student_notification_status',
+      page: () => const StudentNotificationStatus(),
+      binding: student_notification_status(),
+    ),
     GetPage(
         name: '/student_changepassword',
         page: () => StudentChangepassword(),

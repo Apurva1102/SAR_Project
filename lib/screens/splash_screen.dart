@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'login_screen.dart';
-
+import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,20 +14,20 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(Duration(seconds: 3), () {
       // Get.offNamed('/LoginScreen');
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => LoginScreen(),
-          ));
+      // Navigator.pushReplacement(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (context) => LoginScreen(),
+      //     ));
+      Get.toNamed('/login');
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-      //  color: Colors.teal,
-        child: Center(child: Image.asset('assets/images/flashscreenlogo.png')),
+    return SafeArea(
+      child: Scaffold(
+        body: Center(child: Image.asset('assets/images/flashscreenlogo.png')),
       ),
     );
   }

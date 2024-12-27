@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sar_project/routes/app_pages.dart';
-import 'package:sar_project/screens/students/dashboard_student.dart';
 import 'package:sizer/sizer.dart';
 import 'controller/auth_controller.dart';
 
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context, Orientation orientation,
           DeviceType deviceType) {
         return GetMaterialApp(
-          title: 'SAR APP',
+          title: 'SA APP',
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
             useMaterial3: true,
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           getPages: AppPages.routes,
           initialRoute: AppPages.INITIAL_ROUTE,
-          // home: DashboardStudent(),
+          // home: Demo1(),
         );
       },
     );

@@ -7,6 +7,7 @@ class AuthBinding implements Bindings {
     Get.lazyPut<AuthController>(() => AuthController());
   }
 }
+
 class splash_screen implements Bindings {
   @override
   void dependencies() {
@@ -20,6 +21,7 @@ class login_screen implements Bindings {
     Get.lazyPut<AuthController>(() => AuthController());
   }
 }
+
 class forget_pass implements Bindings {
   @override
   void dependencies() {
@@ -69,13 +71,20 @@ class teacher_changepassword implements Bindings {
   }
 }
 
-
 class teacher_notification_screen implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<AuthController>(() => AuthController());
   }
 }
+
+class status_bar implements Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut<AuthController>(() => AuthController());
+  }
+}
+
 
 class dashboard_student implements Bindings {
   @override
@@ -105,6 +114,12 @@ class student_notification implements Bindings {
   }
 }
 
+class student_notification_status implements Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut<AuthController>(() => AuthController());
+  }
+}
 
 class student_changepassword implements Bindings {
   @override

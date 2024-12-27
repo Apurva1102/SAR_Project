@@ -4,9 +4,11 @@ class Assets {
 
   static const String imagesAvtar = 'assets/images/avtar.png';
   static const String imagesCong = 'assets/images/cong.png';
+  static const String imagesError = 'assets/images/error.png';
   static const String imagesFlashscreenlogo = 'assets/images/flashscreenlogo.png';
   static const String imagesOops = 'assets/images/oops.png';
   static const String imagesPopUp = 'assets/images/pop_up.png';
+  static const String imagesSaLogo = 'assets/images/sa_logo.png';
   static const String imagesTopGradient = 'assets/images/top_gradient.png';
 
 }

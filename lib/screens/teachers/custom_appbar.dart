@@ -1,67 +1,60 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:sizer/sizer.dart';
+import 'package:get/get.dart';
+import '../../controller/student_controller/studentprofile_controller.dart';
 
-class CustomAppBar extends StatefulWidget {
-  @override
-  State<CustomAppBar> createState() => _CustomAppBarState();
-}
+class CustomAppBar extends StatelessWidget {
+  final StudentProfileController controller = Get.put(StudentProfileController());
 
-class _CustomAppBarState extends State<CustomAppBar> {
+  CustomAppBar({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
-      alignment: Alignment.center,
-      children: [
-        Positioned(
-          bottom: 3.h,
-          left: (MediaQuery.of(context).size.width / 2) - 55,
-          child: Container(
-            padding: EdgeInsets.all(3),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-            ),
-            child: Column(
-              children: [
-                CircleAvatar(
-                  radius: 51.0,
-                 backgroundImage: AssetImage('assets/images/avtar.png'),
-                ),
-                SizedBox(height: 1.h,),
-                Text("Shivam Dubey",style: TextStyle(fontSize: 12.sp,fontWeight: FontWeight.bold),),
-              ],
+    return Obx(() {
+      final studentProfile = controller.studentProfile.value;
+      if (controller.isLoading.value) {
+        return const Center(child: CircularProgressIndicator());
+      }
+      return Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+            // bottom: 0.h,
+            left: (MediaQuery.of(context).size.width / 2) - 55, // Center the avatar
+            child: Container(
+              padding: const EdgeInsets.all(3),
+              decoration: const BoxDecoration(shape: BoxShape.circle),
+              child: Stack(
+                children: [
+                  CircleAvatar(
+                    radius: 51.0,
+                    backgroundImage: studentProfile != null && studentProfile.userPhoto != null
+                        ? NetworkImage('http://20.235.242.228:5006/${studentProfile.userPhoto!}')
+                        : null,
+                    // backgroundColor: Colors.lightBlue,
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: GestureDetector(
+                      onTap: controller.uploadProfilePhoto,
+                      child: CircleAvatar(
+                        radius: 15.0,
+                        backgroundColor: Colors.blue,
+                        child: const Icon(
+                          Icons.add, // Use Icons.add for a plus icon if desired
+                          color: Colors.white,
+                          size: 18,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-
-        // Action icons at the top right
-        Positioned(
-          top: 3.h, // Adjust the top spacing
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              SizedBox(width: 60.w),
-              IconButton(
-                icon: Icon(Icons.qr_code_scanner_sharp, color: Colors.black),
-                onPressed: () {
-                  print('QR Code Scanner clicked!');
-                },
-              ),
-              SizedBox(width: 3.w),
-              IconButton(
-                icon: Icon(Icons.edit, color: Colors.black),
-                onPressed: () {
-                  print('Edit clicked!');
-                },
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
+        ],
+      );
+    });
   }
 }

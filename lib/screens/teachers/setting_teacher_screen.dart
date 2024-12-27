@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-class SettingTeacherScreen extends StatefulWidget {
+class SettingTeacherScreen extends StatelessWidget {
   const SettingTeacherScreen({super.key});
 
-  @override
-  State<SettingTeacherScreen> createState() => _SettingTeacherScreenState();
-}
-
-class _SettingTeacherScreenState extends State<SettingTeacherScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,18 +15,30 @@ class _SettingTeacherScreenState extends State<SettingTeacherScreen> {
             children: [
               ExpansionTile(
                 title: Text("Notification Setting"),
-              ),
-              ExpansionTile(
-                title: Text("Password Manager"),
                 children: [
                   ListTile(
-                      title: TextButton(onPressed: () {
-                        Get.toNamed('/teacher_changepassword');
+                    title: TextButton(
+                      onPressed: () {
+                        Get.toNamed('/status_bar');
                       },
-                          child: Text("Change Password", style: TextStyle(
-                              color: Colors.black87, fontSize: 12.sp),)
-                      )
+                      child: Text(" Notification",style: TextStyle(fontSize: 12.sp,color: Colors.black),),
+                    ),
                   )
+                ],
+              ),
+              ExpansionTile(
+                title: const Text("Password Manager"),
+                children: [
+                  ListTile(
+                      title: TextButton(
+                          onPressed: () {
+                            Get.toNamed('/teacher_changepassword');
+                          },
+                          child: Text(
+                            "Change Password",
+                            style: TextStyle(
+                                color: Colors.black87, fontSize: 12.sp),
+                          )))
                 ],
               ),
             ],

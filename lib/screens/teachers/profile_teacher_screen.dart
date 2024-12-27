@@ -1,81 +1,167 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import '../../controller/teacher_controller/teacher_profile_controller.dart';
 
-import 'custom_appbar.dart';
+class ProfileTeacherScreen extends StatelessWidget {
+  ProfileTeacherScreen({super.key});
 
-class ProfileTeacherScreen extends StatefulWidget {
-  const ProfileTeacherScreen({super.key});
+  final TeacherProfileController _controller =
+      Get.put(TeacherProfileController());
 
-  @override
-  State<ProfileTeacherScreen> createState() => _ProfileTeacherScreenState();
-}
-
-class _ProfileTeacherScreenState extends State<ProfileTeacherScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: PreferredSize(
-      //   preferredSize: Size.fromHeight(20.h), // Adjust the height as needed
-      //   child: Container(color: Colors.transparent,
-          // decoration: BoxDecoration(
-          //   gradient: LinearGradient(
-          //     colors:
-          //     [Color(0xFFDFEDFD), Color(0xFF1A8CFF)],
-          //     end: Alignment.topCenter,
-          //     begin: Alignment.bottomCenter,
-          //   ),
-          // ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-          //  mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(height: 1.h,),
-              Text("      User ID: ",style: TextStyle(fontSize: 13.sp),),
-              infoTeacher(),
-              SizedBox(height: 1.h,),
-              Text("      Full Name: ",style: TextStyle(fontSize: 13.sp),),
-              infoTeacher(),
-              SizedBox(height: 1.h,),
-              Text("      Class: ",style: TextStyle(fontSize: 13.sp),),
-              infoTeacher(),
-              SizedBox(height: 1.h,),
-              Text("      Section: ",style: TextStyle(fontSize: 13.sp),),
-              infoTeacher(),
-              SizedBox(height: 1.h,),
-              Text("      Conact No: ",style: TextStyle(fontSize: 13.sp),),
-              infoTeacher(),
-              SizedBox(height: 1.h,),
-              Text("      Password: ",style: TextStyle(fontSize: 13.sp),),
-              infoTeacher(),
-            ],
-          ),
-        ),
-      ),
-      );
-  }
-}
+    return Scaffold(body: Obx(() {
+      if (_controller.isLoading.value) {
+        return const Center(child: CircularProgressIndicator());
+      } else {
+        final profile = _controller.teacherProfile.value;
+        return SingleChildScrollView(
+          reverse: true,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              SizedBox(height: 2.h),
+              // Center(
+              //   child: Stack(
+              //     children: [
+              //       CircleAvatar(
+              //         radius: 50.0,
+              //         backgroundImage: profile != null &&
+              //                 profile.userPhoto != null
+              //             ? NetworkImage(
+              //                 'http://20.235.242.228:5006/${profile.userPhoto!}')
+              //             : null,
+              //         // backgroundColor: Colors.blue,
+              //
+              //       ),
+              //       Positioned(
+              //         bottom: 0,
+              //         right: 0,
+              //         child: GestureDetector(
+              //           onTap: () {
+              //             _controller.uploadProfileTeacher();
+              //           },
+              //           child: CircleAvatar(
+              //             radius: 15.0,
+              //             backgroundColor: Colors.blue,
+              //             child: const
+              //             Icon(
+              //               Icons.add, // Use Icons.add if you want a plus icon instead
+              //               color: Colors.white,
+              //               size: 20,
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              SizedBox(height: 2.h),
+              // Other profile details and widgets here
 
-Widget infoTeacher() {
-  return Padding(
-    padding: const EdgeInsets.all(3.0),
-    child: Container(
-      decoration: BoxDecoration(
-        color: Colors.grey[200], // Set the desired grey background color
-        borderRadius: BorderRadius.circular(30), // Match the border radius
-      ),
-      child: TextFormField(
-        decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-            borderSide: BorderSide.none, // Remove the border side
+              const Text("    Username"),
+              Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: TextFormField(
+                    readOnly: true,
+                    decoration: InputDecoration(
+                      hintText: _controller.userName.value,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide.none,
+                      ),
+                      filled: true,
+                      fillColor: Colors.transparent,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 1.h,
+              ),
+              const Text("    Name"),
+              Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: TextFormField(
+                    readOnly: true,
+                    decoration: InputDecoration(
+                      hintText: profile!.name,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide.none,
+                      ),
+                      filled: true,
+                      fillColor: Colors.transparent,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 1.h,
+              ),
+              const Text("    Email ID"),
+              Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: TextFormField(
+                    readOnly: true,
+                    decoration: InputDecoration(
+                      hintText: profile.userEmail,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide.none,
+                      ),
+                      filled: true,
+                      fillColor: Colors.transparent,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 1.h,
+              ),
+              const Text("    Contact Number"),
+              Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: TextFormField(
+                    readOnly: true,
+                    decoration: InputDecoration(
+                      hintText: profile.userNumber,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide.none,
+                      ),
+                      filled: true,
+                      fillColor: Colors.transparent,
+                    ),
+                  ),
+                ),
+              ),
+            ]),
           ),
-          filled: true, // Allows the background color to be visible
-          fillColor: Colors.transparent, // Make the fill color transparent
-        ),
-      ),
-    ),
-  );
+        );
+      }
+    }));
+  }
 }

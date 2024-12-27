@@ -8,10 +8,12 @@ class Routes {
   static const PROFILETEACHERSCREEN = 'profile_teacher_screen';
   static const SETTINGTEACHERSCREEN = 'setting_teacher';
   static const TEACHERNOTIFICATIONSCREEN = 'teacher_notification_screen';
+  static const STATUSBAR = 'status_bar';
   static const TEACHERCHANGEPASSWORD = 'teacher_changepassword';
   static const DASHBOARDSTUDENT = 'dashboard_student';
   static const PROFILESTUDENTSCREEN = 'profile_student_screen';
   static const SETTINGSTUDENTSCREEN = 'setting_student_screen';
   static const STUDENTNOTIFICATION = 'student_notification';
+  static const STUDENTNOTIFICATIONSTATUS = 'student_notification_status';
   static const STUDENTCHANGEPASSWORD = 'student_changepassword';
 }
